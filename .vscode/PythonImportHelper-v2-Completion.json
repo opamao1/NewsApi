@@ -1,0 +1,88 @@
+[
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "get_news",
+        "importPath": "services.get_data",
+        "description": "services.get_data",
+        "isExtraImport": true,
+        "detail": "services.get_data",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "get_news",
+        "kind": 2,
+        "importPath": "services.get_data",
+        "description": "services.get_data",
+        "peekOfCode": "def get_news():\n    with open('Data/data.json') as f:\n        data = json.load(f)\n        return data",
+        "detail": "services.get_data",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def home():\n    return render_template(\"index.html\")\n@app.route(\"/news\", methods=['GET'])\ndef get_data():\n    return get_news()\n@app.route(\"/doc\")\ndef render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_data",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_data():\n    return get_news()\n@app.route(\"/doc\")\ndef render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "render_docs",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\n@app.route(\"/\")\ndef home():\n    return render_template(\"index.html\")\n@app.route(\"/news\", methods=['GET'])\ndef get_data():\n    return get_news()\n@app.route(\"/doc\")\ndef render_docs():\n    return render_template(\"docs.html\")",
+        "detail": "app",
+        "documentation": {}
+    }
+]
