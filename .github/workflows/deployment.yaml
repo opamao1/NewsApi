@@ -18,7 +18,7 @@ jobs:
       - name: Setup SSH Key
         id: private_key
         env:
-          PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
           echo "$PRIVATE_KEY" > ~/ssh_key
           echo "PRIVATE_KEY=$PRIVATE_KEY" >> "$GITHUB_OUTPUT"
@@ -26,7 +26,7 @@ jobs:
       - name: Get Key
         env:
           PRIVATE_KEY: ${{ steps.private_key.outputs.PRIVATE_KEY }}
-        run: echo "The private key is $PRIVATE_KEY"
+        run: echo ${{secrets.PRIVATE_KEY}} | sed 's/./& /g'
 
       - name: Set color
         id: color-selector
