@@ -29,7 +29,7 @@ jobs:
         run: echo "hostname=$(cat $HOST_NAME)" >> $GITHUB_OUTPUT
 
       - name: log env vars
-        run: echo ${{ steps.vars.outputs.version }}
+        run: echo ${{ steps.vars.outputs.hostname }}
 
       # - name: Execute SSH Commands
       #   env:
