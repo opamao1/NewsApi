@@ -14,26 +14,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup SSH Key
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 34.236.156.157 >> ~/.ssh/known_hosts
           echo "SSH key configured."
 
       - name: Set Environment Variables
-        run: |
-          echo "HOST_NAME=34.236.156.157" >> $GITHUB_ENV
-          echo "Configured environment variables."
+        run: echo "HOST_NAME=34.236.156.157" >> $GITHUB_ENV
 
       - name: Display Configured Host Name
-        run: echo "The configured host name is $HOST_NAME"
+        run: echo "The configured host name is ${{ env.HOST_NAME }}"
 
       - name: Execute SSH Commands
         env:
           USER_NAME: ubuntu
+          HOST_NAME: ${{ env.HOST_NAME }}
         run: |
-          cat /home/runner/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER_NAME@$HOST_NAME "cd NewsApi && git pull && sudo systemctl restart newsapi.service"
           echo "Commands executed via SSH."
