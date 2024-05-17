@@ -1,28 +1,27 @@
+
+
 name: Flask Automated Deployment
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:  # Allows manual triggering of the workflow from GitHub UI
-  schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Setup SSH Key
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
           echo "$PRIVATE_KEY" > ~/ssh_key
           chmod 600 ~/ssh_key
+
       - name: Execute SSH Commands
         env:
           HOST_NAME: ${{ secrets.HOST_NAME }}
