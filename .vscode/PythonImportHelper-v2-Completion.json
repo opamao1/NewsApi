@@ -9,14 +9,6 @@
         "documentation": {}
     },
     {
-        "label": "get_news",
-        "importPath": "services.get_data",
-        "description": "services.get_data",
-        "isExtraImport": true,
-        "detail": "services.get_data",
-        "documentation": {}
-    },
-    {
         "label": "Flask",
         "importPath": "flask",
         "description": "flask",
@@ -33,56 +25,64 @@
         "documentation": {}
     },
     {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
+        "label": "get_news",
+        "importPath": "services.get_data",
+        "description": "services.get_data",
         "isExtraImport": true,
-        "detail": "flask",
+        "detail": "services.get_data",
+        "documentation": {}
+    },
+    {
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
+        "isExtraImport": true,
+        "detail": "flask_cors",
         "documentation": {}
     },
     {
         "label": "get_news",
         "kind": 2,
-        "importPath": "services.get_data",
-        "description": "services.get_data",
+        "importPath": ".venv.services.get_data",
+        "description": ".venv.services.get_data",
         "peekOfCode": "def get_news():\n    with open('Data/data.json') as f:\n        data = json.load(f)\n        return data",
-        "detail": "services.get_data",
+        "detail": ".venv.services.get_data",
         "documentation": {}
     },
     {
         "label": "home",
         "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def home():\n    return render_template(\"index.html\")\n@app.route(\"/news\", methods=['GET'])\ndef get_data():\n    return get_news()\n@app.route(\"/doc\")\ndef render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(debug=True)",
-        "detail": "app",
+        "importPath": ".venv.app",
+        "description": ".venv.app",
+        "peekOfCode": "def home():\n    return render_template(\"index.html\")\n@app.route(\"/news\", methods=['GET'])\ndef get_data():\n    return get_news()\n@app.route(\"/docs\")\ndef render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(host='0.0.0.0',debug=True)",
+        "detail": ".venv.app",
         "documentation": {}
     },
     {
         "label": "get_data",
         "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def get_data():\n    return get_news()\n@app.route(\"/doc\")\ndef render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(debug=True)",
-        "detail": "app",
+        "importPath": ".venv.app",
+        "description": ".venv.app",
+        "peekOfCode": "def get_data():\n    return get_news()\n@app.route(\"/docs\")\ndef render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(host='0.0.0.0',debug=True)",
+        "detail": ".venv.app",
         "documentation": {}
     },
     {
         "label": "render_docs",
         "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(debug=True)",
-        "detail": "app",
+        "importPath": ".venv.app",
+        "description": ".venv.app",
+        "peekOfCode": "def render_docs():\n    return render_template(\"docs.html\")\nif __name__ == \"__main__\":\n    app.run(host='0.0.0.0',debug=True)",
+        "detail": ".venv.app",
         "documentation": {}
     },
     {
         "label": "app",
         "kind": 5,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "app = Flask(__name__)\n@app.route(\"/\")\ndef home():\n    return render_template(\"index.html\")\n@app.route(\"/news\", methods=['GET'])\ndef get_data():\n    return get_news()\n@app.route(\"/doc\")\ndef render_docs():\n    return render_template(\"docs.html\")",
-        "detail": "app",
+        "importPath": ".venv.app",
+        "description": ".venv.app",
+        "peekOfCode": "app = Flask(__name__)\nCORS(app) \n@app.route(\"/\")\ndef home():\n    return render_template(\"index.html\")\n@app.route(\"/news\", methods=['GET'])\ndef get_data():\n    return get_news()\n@app.route(\"/docs\")\ndef render_docs():",
+        "detail": ".venv.app",
         "documentation": {}
     }
 ]
