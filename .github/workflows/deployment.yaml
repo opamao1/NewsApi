@@ -1,3 +1,5 @@
+
+
 name: Flask Automated Deployment
 
 on:
@@ -13,16 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup SSH Key
+      - name: Execute SSH Commands
         env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        run: |
-          echo "${PRIVATE_KEY}" | base64 --decode > private_key
-          chmod 600 private_key
-
-      - name: Push to EC2
-        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           HOST_NAME: ${{ secrets.HOST_NAME }}
           USER_NAME: ${{ secrets.USER_NAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME} 
+          echo "Debug: Attempting to connect to $HOST_NAME with user $USER_NAME"
+          ssh -vvv -o StrictHostKeyChecking=no -i <(echo "$SSH_PRIVATE_KEY") $USER_NAME@$HOST_NAME "echo 'Connection Successful'"
