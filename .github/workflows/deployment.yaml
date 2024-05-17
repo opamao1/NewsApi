@@ -26,7 +26,7 @@ jobs:
       - name: Get Key
         env:
           PRIVATE_KEY: ${{ steps.private_key.outputs.PRIVATE_KEY }}
-        run: cat ./private_key.pem
+        run: cat private_key.pem
 
       - name: Set color
         id: color-selector
