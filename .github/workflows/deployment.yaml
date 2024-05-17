@@ -16,8 +16,8 @@ jobs:
       - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${MY_KEY}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${MY_KEY}" > ~/.ssh/id_rsa.pem
+          chmod 600 ~/.ssh/id_rsa.pem
           ssh-keyscan -H 34.236.156.157 >> ~/.ssh/known_hosts
           echo "SSH key configured."
         env:
@@ -61,5 +61,5 @@ jobs:
           USER_NAME: ubuntu
           HOST_NAME: ${{ env.HOST_NAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER_NAME@$HOST_NAME "cd NewsApi && git pull && sudo systemctl restart newsapi.service"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pem $USER_NAME@$HOST_NAME "cd NewsApi && git pull && sudo systemctl restart newsapi.service"
           echo "Commands executed via SSH."
