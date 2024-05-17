@@ -22,14 +22,13 @@ jobs:
           echo "$PRIVATE_KEY" > ~/ssh_key
           chmod 600 ~/ssh_key
 
-      - name: debug env vars
+      - name: Set color
+        id: color-selector
+        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+      - name: Get color
         env:
-          HOST_NAME: ${{ secrets.HOST_NAME }}
-          USER_NAME: ${{ secrets.USER_NAME }}
-        run: echo "hostname=$(cat $HOST_NAME)" >> $GITHUB_OUTPUT
-
-      - name: log env vars
-        run: echo ${{ steps.vars.outputs.hostname }}
+          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+        run: echo "The selected color is $SELECTED_COLOR"
 
       # - name: Execute SSH Commands
       #   env:
