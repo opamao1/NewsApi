@@ -26,13 +26,14 @@ jobs:
       - name: Get Key
         env:
           PRIVATE_KEY: ${{ steps.private_key.outputs.PRIVATE_KEY }}
-        run: echo ${{secrets.PRIVATE_KEY}} | sed 's/./& /g'
+        run: cat ./private_key.pem
 
       - name: Set color
         id: color-selector
         env:
           HOST_NAME: 34.236.156.157
         run: echo "SELECTED_COLOR=$HOST_NAME" >> "$GITHUB_OUTPUT"
+
       - name: Get color
         env:
           SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
