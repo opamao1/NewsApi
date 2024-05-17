@@ -24,7 +24,9 @@ jobs:
 
       - name: Set color
         id: color-selector
-        run: echo "SELECTED_COLOR=${{secrets.HOST_NAME}}" >> "$GITHUB_OUTPUT"
+        env:
+          HOST_NAME: ${{secrets.HOST_NAME}}
+        run: echo "SELECTED_COLOR=$HOST_NAME" >> "$GITHUB_OUTPUT"
       - name: Get color
         env:
           SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
