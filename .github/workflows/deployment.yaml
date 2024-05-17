@@ -32,7 +32,6 @@ jobs:
 
       - name: Execute SSH Commands
         env:
-          # USER_NAME: ${{ secrets.USER_NAME }}
           USER_NAME: ubuntu
         run: |
           cat /home/runner/.ssh/id_rsa
