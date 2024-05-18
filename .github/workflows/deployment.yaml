@@ -21,9 +21,10 @@ jobs:
     - name: Setup SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        echo "Host ec2-host\n\tHostName 34.236.156.157\n\tUser ubuntu\n\tIdentityFile ~/.ssh/id_rsa\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+    echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    # Note the correct formatting below, especially around the new lines and tabs
+    echo -e "Host ec2-host\n\tHostName 34.236.156.157\n\tUser ubuntu\n\tIdentityFile ~/.ssh/id_rsa\n\tStrictHostKeyChecking no" > ~/.ssh/config
 
     - name: SSH and Run Command
       run: ssh ec2-host "echo 'Hello from EC2!'; hostname; uptime"
