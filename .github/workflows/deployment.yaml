@@ -5,23 +5,24 @@ name: SSH into EC2 and Run Command
 on:
   push:
     branches:
-      - main  # Set this to the branch you want to trigger the action.
+      - main  # This action triggers on pushes to the main branch.
 
 jobs:
   ssh-and-run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Specifies that the job runs on the latest Ubuntu runner.
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4  # Checks out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
 
     - name: Setup SSH key
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        # Note the correct formatting below, especially around the new lines and tabs
         echo -e "Host ec2-host\n\tHostName 34.236.156.157\n\tUser ubuntu\n\tIdentityFile ~/.ssh/id_rsa\n\tStrictHostKeyChecking no" > ~/.ssh/config
+        # The above configures SSH to not check the host's key, easing automation but consider the security implications.
 
     - name: SSH and Run Command
       run: ssh ec2-host "echo 'Hello from EC2!'; hostname; uptime"
+        # This command SSHs into the EC2 host, prints a greeting, the hostname, and uptime.
