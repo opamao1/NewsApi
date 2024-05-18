@@ -1,5 +1,4 @@
 
-
 name: SSH into EC2 and Run Command
 
 on:
@@ -18,10 +17,9 @@ jobs:
     - name: Setup SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 --decode > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         echo -e "Host ec2-host\n\tHostName 34.236.156.157\n\tUser ubuntu\n\tIdentityFile ~/.ssh/id_rsa\n\tStrictHostKeyChecking no" > ~/.ssh/config
-        # The above configures SSH to not check the host's key, easing automation but consider the security implications.
 
     - name: SSH and Run Command
       run: ssh ec2-host "echo 'Hello from EC2!'; hostname; uptime"
