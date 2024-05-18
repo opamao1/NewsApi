@@ -1,41 +1,29 @@
 
 
-name: Flask Automated Deployment
+
+
+
+name: SSH into EC2 and Run Command
 
 on:
   push:
     branches:
-      - main
+      - main  # Set this to the branch you want to trigger the action.
 
 jobs:
-  deploy:
+  ssh-and-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup SSH Key
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 34.236.156.157 >> ~/.ssh/known_hosts
-          echo "SSH key configured."
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        echo "Host ec2-host\n\tHostName 34.236.156.157\n\tUser ubuntu\n\tIdentityFile ~/.ssh/id_rsa\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
-      - name: Set Environment Variables
-        run: |
-          echo "HOST_NAME=34.236.156.157" >> $GITHUB_ENV
-          echo "Configured environment variables."
-
-      - name: Display Configured Host Name
-        run: echo "The configured host name is $HOST_NAME"
-
-      - name: Execute SSH Commands
-        env:
-          USER_NAME: ${{ secrets.USER_NAME }}
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER_NAME@$HOST_NAME "cd NewsApi && git pull && sudo systemctl restart newsapi.service"
-          echo "Commands executed via SSH."
+    - name: SSH and Run Command
+      run: ssh ec2-host "echo 'Hello from EC2!'; hostname; uptime"
