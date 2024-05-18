@@ -1,4 +1,5 @@
 
+
 name: SSH into EC2 and Run Command
 
 on:
@@ -21,6 +22,11 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         echo -e "Host ec2-host\n\tHostName 34.236.156.157\n\tUser ubuntu\n\tIdentityFile ~/.ssh/id_rsa\n\tStrictHostKeyChecking no" > ~/.ssh/config
 
-    - name: SSH and Run Command
+    - name: SSH and Echo Greeting
       run: ssh ec2-host "echo 'Hello from EC2!'; hostname; uptime"
         # This command SSHs into the EC2 host, prints a greeting, the hostname, and uptime.
+
+    - name: SSH and Change Directory
+      run: ssh ec2-host "cd /home/ubuntu/NewsApi; echo 'Now in the desired directory'; hostname; uptime"
+        # This command SSHs into the EC2 host, changes directory, and prints the status.
+
