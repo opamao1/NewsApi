@@ -1,3 +1,5 @@
+
+
 name: Flask Automated Deployment
 
 on:
@@ -20,6 +22,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 34.236.156.157 >> ~/.ssh/known_hosts
           echo "SSH key configured."
 
       - name: Set Environment Variables
@@ -30,10 +33,9 @@ jobs:
       - name: Display Configured Host Name
         run: echo "The configured host name is $HOST_NAME"
 
-      # Uncomment the following block to enable SSH commands execution
-      # - name: Execute SSH Commands
-      #   env:
-      #     USER_NAME: ${{ secrets.USER_NAME }}
-      #   run: |
-      #     ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER_NAME@$HOST_NAME "cd NewsApi && git pull && sudo systemctl restart newsapi.service"
-      #     echo "Commands executed via SSH."
+      - name: Execute SSH Commands
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USER_NAME@$HOST_NAME "cd NewsApi && git pull && sudo systemctl restart newsapi.service"
+          echo "Commands executed via SSH."
