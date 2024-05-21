@@ -28,5 +28,5 @@ jobs:
 
     - name: SSH and Change Directory
       run: ssh ec2-host "cd /home/ubuntu/NewsApi; echo 'Now in the desired directory'; hostname; uptime"
-        # This command SSHs into the EC2 host, changes directory, and prints the status.
+        # This command SSHs into the EC2 host, changes directory, and prints the status...
 
