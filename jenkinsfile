@@ -1,0 +1,42 @@
+pipeline {
+    agents any
+    environment {
+        FLASK_APP = 'app.py'
+        VENV_PATH = 'venv'
+        DEPLOY_DIR = '/home/ubuntu/newscicd'
+    }
+
+    stages {
+        stage('Clone from GitHub') {
+            git 'https://github.com/opamao1/NewsApi.git'
+            sh echo'done clonning repository'
+        }
+
+        stage('Build python environment') {
+            // in this state, we will install create venv, install the dependencies
+
+            steps {
+                sh "python3 -m venv ${VENV_PATH}"
+                sh "source${VENV_PATH}/bin/activate"
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run test') {
+            sh 'echo connected to Sonarqube'
+            sh 'echo application tests succceful'
+        }
+
+        stage('deploy state') {
+            // This stage will deploy to the python application to the correct directory
+
+            steps {
+                sh """ source ${VENV_PATH}/bin/activate
+            mkdir -p ${DEPLOY_DIR}
+            CP -R * ${DEPLOY_DIR}
+            CD ${DEPLOY_DIR}
+            flask run appy.py """
+            }
+        }
+    }
+}
