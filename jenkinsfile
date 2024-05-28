@@ -8,8 +8,10 @@ pipeline {
 
     stages {
         stage('Clone from GitHub') {
-            steps { git 'https://github.com/opamao1/NewsApi.git'
-                sh 'echo done clonning repository'}
+            steps {   checkout([$class: 'GitSCM',
+                    branches: [[name: 'main']],  // Specify 'main' branch
+                    userRemoteConfigs: [[url: 'https://github.com/opamao1/NewsApi.git']]])
+                // Your build steps here}
         }
 
         stage('Build python environment') {
