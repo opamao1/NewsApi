@@ -39,10 +39,15 @@ pipeline {
             // This stage will deploy to the python application to the correct dir
 
             steps {
-                sh """ ${VENV_PATH}/bin/activate
+
+
+                sh """ 
+                pwd && ls
+                . ${VENV_PATH}/bin/activate
                 mkdir -p ${DEPLOY_DIR}
                 cp -R * ${DEPLOY_DIR}
                 cd ${DEPLOY_DIR}
+
                 flask run app.py """
             }
         }
