@@ -30,7 +30,7 @@ pipeline {
         }
 
         stage('deploy state') {
-            // This stage will deploy to the python application to the correct directory
+            // This stage will deploy to the python application to the correct directoryyy
 
             steps {
                 sh """ source ${VENV_PATH}/bin/activate
