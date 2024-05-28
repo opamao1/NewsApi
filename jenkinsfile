@@ -4,7 +4,7 @@ pipeline {
     environment {
         FLASK_APP = 'app.py'
         VENV_PATH = 'venv'
-        DEPLOY_DIR = '/home/ubuntu/newscicd'
+        DEPLOY_DIR = '/'
     }
 
     stages {
