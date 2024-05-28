@@ -20,7 +20,7 @@ pipeline {
             // in this state, we will install create venv, install the dependencies
 
             steps {
-                sh "cd /home/ubuntu"
+                sh "cd /"
                 sh "python3 -m venv ${VENV_PATH}"
                 sh "pwd && ls"
                 sh "sudo . ${VENV_PATH}/bin/activate"
