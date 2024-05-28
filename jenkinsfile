@@ -20,8 +20,10 @@ pipeline {
             // in this state, we will install create venv, install the dependencies
 
             steps {
+                
                 sh "python3 -m venv ${VENV_PATH}"
-                sh "source ${VENV_PATH}/bin/activate"
+                sh "pwd && ls"
+                sh ".  ${VENV_PATH}/bin/activate"
                 sh 'pip3 install -r requirements.txt'
             }
         }
@@ -37,7 +39,7 @@ pipeline {
             // This stage will deploy to the python application to the correct dir
 
             steps {
-                sh """source ${VENV_PATH}/bin/activate
+                sh """ ${VENV_PATH}/bin/activate
                 mkdir -p ${DEPLOY_DIR}
                 cp -R * ${DEPLOY_DIR}
                 cd ${DEPLOY_DIR}
