@@ -8,8 +8,8 @@ pipeline {
 
     stages {
         stage('Clone from GitHub') {
-            git 'https://github.com/opamao1/NewsApi.git'
-            sh 'echo done clonning repository'
+            steps { git 'https://github.com/opamao1/NewsApi.git'
+                sh 'echo done clonning repository'}
         }
 
         stage('Build python environment') {
