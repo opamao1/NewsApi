@@ -1,5 +1,5 @@
 pipeline {
-    agents any
+    agent any
     environment {
         FLASK_APP = 'app.py'
         VENV_PATH = 'venv'
