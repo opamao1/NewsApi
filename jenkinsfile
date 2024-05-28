@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     environment {
         FLASK_APP = 'app.py'
         VENV_PATH = 'venv'
@@ -8,10 +9,11 @@ pipeline {
 
     stages {
         stage('Clone from GitHub') {
-            steps {   checkout([$class: 'GitSCM',
+            steps {
+                checkout([$class: 'GitSCM',
                     branches: [[name: 'main']],  // Specify 'main' branch
                     userRemoteConfigs: [[url: 'https://github.com/opamao1/NewsApi.git']]])
-                // Your build steps here}
+            }
         }
 
         stage('Build python environment') {
@@ -19,27 +21,27 @@ pipeline {
 
             steps {
                 sh "python3 -m venv ${VENV_PATH}"
-                sh "source${VENV_PATH}/bin/activate"
-                sh 'pip install -r requirements.txt'
+                sh "source ${VENV_PATH}/bin/activate"
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage('Run test') {
             steps {
                 sh 'echo connected to Sonarqube'
-                sh 'echo application tests sucful'
+                sh 'echo application tests successful'
             }
         }
 
         stage('deploy state') {
-            // This stage will deploy to the pythoon application to the correct dir
+            // This stage will deploy to the python application to the correct dir
 
             steps {
-                sh """ source ${VENV_PATH}/bin/activate
-            mkdir -p ${DEPLOY_DIR}
-            CP -R * ${DEPLOY_DIR}
-            CD ${DEPLOY_DIR}
-            flask run appy.py """
+                sh """source ${VENV_PATH}/bin/activate
+                mkdir -p ${DEPLOY_DIR}
+                cp -R * ${DEPLOY_DIR}
+                cd ${DEPLOY_DIR}
+                flask run app.py """
             }
         }
     }
