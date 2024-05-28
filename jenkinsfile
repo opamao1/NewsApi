@@ -25,7 +25,7 @@ pipeline {
         stage('Run test') {
             steps {
                 sh 'echo connected to Sonarqube'
-                sh 'echo application tests succceful'
+                sh 'echo application tests sucful'
             }
         }
 
