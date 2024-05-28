@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone from GitHub') {
             git 'https://github.com/opamao1/NewsApi.git'
-            sh echo'done clonning repository'
+            sh 'echo done clonning repository'
         }
 
         stage('Build python environment') {
@@ -23,8 +23,10 @@ pipeline {
         }
 
         stage('Run test') {
-            sh 'echo connected to Sonarqube'
-            sh 'echo application tests succceful'
+            steps {
+                sh 'echo connected to Sonarqube'
+                sh 'echo application tests succceful'
+            }
         }
 
         stage('deploy state') {
