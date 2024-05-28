@@ -4,7 +4,7 @@ pipeline {
     environment {
         FLASK_APP = 'app.py'
         VENV_PATH = 'venv'
-        DEPLOY_DIR = 'test'
+        DEPLOY_DIR = 'service_app'
     }
 
     stages {
@@ -45,8 +45,10 @@ pipeline {
                 pwd && ls
                 . ${VENV_PATH}/bin/activate
                 mkdir -p ${DEPLOY_DIR}
-                cp -R * ${DEPLOY_DIR}
+                ls
+                cp  .venv/app.py ${DEPLOY_DIR}
                 cd ${DEPLOY_DIR}
+                ls
 
                 flask run app.py """
             }
