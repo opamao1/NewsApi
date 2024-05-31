@@ -49,7 +49,7 @@ pipeline {
                 mkdir -p ${DEPLOY_DIR}
                 ls
                 cp  app.py ${DEPLOY_DIR}
-                cp  Data ${DEPLOY_DIR}
+                cp  -r Data ${DEPLOY_DIR}
                 cp  services ${DEPLOY_DIR}
                 cp  templates ${DEPLOY_DIR}
                 cd ${DEPLOY_DIR}
