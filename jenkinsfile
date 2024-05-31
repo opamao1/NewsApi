@@ -48,7 +48,10 @@ pipeline {
                 pip3 install -r requirements.txt
                 mkdir -p ${DEPLOY_DIR}
                 ls
-                cp  .venv/app.py ${DEPLOY_DIR}
+                cp  app.py ${DEPLOY_DIR}
+                cp  Data ${DEPLOY_DIR}
+                cp  services ${DEPLOY_DIR}
+                cp  templates ${DEPLOY_DIR}
                 cd ${DEPLOY_DIR}
                 ls
 
