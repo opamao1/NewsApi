@@ -44,7 +44,7 @@ pipeline {
                 sh """ 
                 pwd && ls
                 . ${VENV_PATH}/bin/activate
-                pip install -r requirments.txt
+                pip3 install -r requirements.txt
                 mkdir -p ${DEPLOY_DIR}
                 ls
                 cp  .venv/app.py ${DEPLOY_DIR}
