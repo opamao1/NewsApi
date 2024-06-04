@@ -42,7 +42,7 @@ pipeline {
             }
         }
         success {
-            echo 'The build and deployment were successful!'
+            echo 'The build and deploymentt were successful!'
         }
         failure {
             echo 'The build or deployment failed.'
