@@ -20,7 +20,7 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 script {
-                    sh "sudo docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ."
+                    sh "docker build -t ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} ."
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('Run Docker container') {
             steps {
                 script {
-                    sh "sudo docker run -d -p 5000:5000 --name newscontainer ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
+                    sh "docker run -d -p 5000:5000 --name newscontainer ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}"
                 }
             }
         }
@@ -37,8 +37,8 @@ pipeline {
     post {
         always {
             script {
-                sh 'sudo docker rm -f newscontainer || true'
-                sh 'sudo docker rmi ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} || true'
+                sh 'docker rm -f newscontainer || true'
+                sh 'docker rmi ${env.DOCKER_IMAGE}:${env.DOCKER_TAG} || true'
             }
         }
         success {
